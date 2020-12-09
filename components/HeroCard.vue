@@ -27,7 +27,7 @@
             Пол: {{ getNested(item, 'gender') }}
           </div>
           <div class="col-xs-12">
-            Локация: {{ getNested(item, 'location.name') }}
+            Локация: {{ getNested(item, 'location','name') }}
           </div>
         </div>
       </div>

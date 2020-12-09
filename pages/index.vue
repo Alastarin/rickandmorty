@@ -2,10 +2,15 @@
   <div v-if="all.length>0">
     <div class="title-container pa-6 mb-4">
       <div class="row center-xs">
-        <div class="col-xs center-xs">
+        <div class="col-xs center-xs-12">
           <h1 class="text-size--h1 text-weight--700 text-color--white">
             The Rick and Morty
           </h1>
+        </div>
+        <div class="col-xs-12">
+          <a href="https://github.com/Alastarin/rickandmorty" class="button--green">
+            GitHub
+          </a>
         </div>
       </div>
     </div>
@@ -47,6 +52,9 @@ import HeroCard from '~/components/HeroCard'
 export default {
   name: 'Index',
   components: { HeroCard },
+  async asyncData ({ store }) {
+    await store.dispatch('characters/getCharacters', { params: { page: store.state.characters.page } })
+  },
   data: () => ({
     loading: false
   }),
@@ -56,7 +64,6 @@ export default {
   },
   mounted () {
     window.addEventListener('scroll', this.handleScroll)
-    this.getCharacters({ page: this.page })
   },
   beforeDestroy () {
     window.removeEventListener('scroll', this.handleScroll)
