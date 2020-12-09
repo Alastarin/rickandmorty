@@ -1,0 +1,42 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the main branch
+on:
+  push:
+    branches: [ main ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      # Runs a single command using the runners shell
+      - name: Dependecies install
+        run: npm install
+
+      - name: Generate Static files for githubPages
+        run: npm run generate
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          ACCESS_TOKEN: ${{secrets.ACCESS_TOKEN}}
+          # In order for GitHub to trigger the rebuild of your page you must provide the action with the repositories provided GitHub token.
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          ACTIONS_STEP_DEBUG: true
+          # This is the branch you wish to deploy to, for example gh-pages or docs.
+          BRANCH: gh-pages
+          # The folder in your repository that you want to deploy. If your build script compiles into a directory named build you would put it here. Folder paths cannot have a leading / or ./. If you wish to deploy the root directory you can place a . here.
+          FOLDER: dist
