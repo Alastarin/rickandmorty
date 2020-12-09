@@ -2,7 +2,7 @@ require('dotenv').config()
 export default {
   target: process.env.NODE_ENV === 'production' ? 'static' : 'server',
   router: {
-    base: process.env.NODE_ENV === 'production' ? '/gh-pages/' : '/'
+    base: process.env.NODE_ENV === 'production' ? '/rickandmorty/' : '/'
   },
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
