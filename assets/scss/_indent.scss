@@ -1,0 +1,61 @@
+$spaceamounts: 12; // Adjust this to include the pixel amounts you need.
+$sides: (top, bottom, left, right, x, y, around); // Leave this variable alone
+$indentCoefficient: 4;
+
+@for $space from 0 through $spaceamounts {
+  @each $side in $sides {
+    @if $side == x{
+      .m#{$side}-#{$space} {
+        margin-right: #{$space};
+        margin-left: #{$space};
+      }
+    }
+    @if $side == x{
+      .m#{$side}-#{$space} {
+        margin-right: #{$space*$indentCoefficient}px;
+        margin-left: #{$space*$indentCoefficient}px;
+      }
+      .p#{$side}-#{$space} {
+        padding-right: #{$space*$indentCoefficient}px;
+        padding-left: #{$space*$indentCoefficient}px;
+      }
+    }
+    @if $side == y {
+      .m#{$side}-#{$space} {
+        margin-top: #{$space*$indentCoefficient}px;
+        margin-bottom: #{$space*$indentCoefficient}px;
+      }
+      .p#{$side}-#{$space} {
+        padding-top: #{$space*$indentCoefficient}px;
+        padding-bottom: #{$space*$indentCoefficient}px;
+      }
+    }
+    @if $side == around {
+      .m#{str-slice($side, 0, 1)}-#{$space} {
+        margin-top: #{$space*$indentCoefficient}px;
+        margin-right: #{$space*$indentCoefficient}px;
+        margin-bottom: #{$space*$indentCoefficient}px;
+        margin-left: #{$space*$indentCoefficient}px;
+      }
+      .p#{str-slice($side, 0, 1)}-#{$space} {
+        padding-top: #{$space*$indentCoefficient}px;
+        padding-right: #{$space*$indentCoefficient}px;
+        padding-bottom: #{$space*$indentCoefficient}px;
+        padding-left: #{$space*$indentCoefficient}px;
+      }
+    }
+    @if $side != x and $side !=y and $side !=around {
+      .m#{str-slice($side, 0, 1)}-#{$space} {
+        margin-#{$side}: #{$space*$indentCoefficient}px !important;
+      }
+
+      .p#{str-slice($side, 0, 1)}-#{$space} {
+        padding-#{$side}: #{$space*$indentCoefficient}px !important;
+      }
+    }
+  }
+}
+.mx-auto{
+  margin-left: auto;
+  margin-right: auto;
+}
