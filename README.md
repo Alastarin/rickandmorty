@@ -6,6 +6,12 @@
 # install dependencies
 $ npm install
 
+# create .env file
+$ cp .env.exmaple .env
+
+# Add api baseUrl
+https://rickandmortyapi.com/api
+
 # serve with hot reload at localhost:3000
 $ npm run dev
 
